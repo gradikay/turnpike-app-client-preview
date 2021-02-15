@@ -1,9 +1,9 @@
-import img1A from "../img/img4.jpg";
-import img1B from "../img/img2.jpg";
-import img1C from "../img/img3.jpg"; 
-import img1D from "../img/img4.jpg"; 
-import img1E from "../img/img5.jpg"; 
-import img1F from "../img/img6.jpg"; 
+import img1A from "../img/img1.jpg";
+import img1B from "../img/img1.jpg";
+import img1C from "../img/img1.jpg"; 
+import img1D from "../img/img1.jpg"; 
+import img1E from "../img/img1.jpg"; 
+import img1F from "../img/img1.jpg"; 
 import img2 from "../img/img1.jpg";
 import img3 from "../img/img1.jpg";
 import img4 from "../img/img1.jpg";
@@ -13,8 +13,8 @@ const data = [
         publisher: {
             publisherId: "sajfodajfdsfadofjaodifaio",
             publisherName: "Gradi",
-            publisherCity: "Atlanta",
-            publisherState: "GA",
+            publisherCity: "City",
+            publisherState: "State",
         },
         postId: "ajdfaoidfjasdfpadfapfajsfjdsi",
         filterKey: "all",
@@ -23,7 +23,7 @@ const data = [
         postPrice: 10000000000,
         postType: "Single Home",
         address: {
-            postState: "GA",
+            postState: "State",
             postCity: "Lithonia",
             postAddress: "555 Rich Road",
             postZipcode: "000000",
@@ -43,8 +43,8 @@ const data = [
         publisher: {
             publisherId: "sajfodajfdsfaddfaaaaaaaaaaaaa",
             publisherName: "Kayamba",
-            publisherCity: "Atlanta",
-            publisherState: "GA",
+            publisherCity: "City",
+            publisherState: "State",
         },
         postId: "ajdfaoidfjasdfpadfapfajsfjdsi",
         filterKey: "all",
@@ -53,7 +53,7 @@ const data = [
         postPrice: 567834,
         postType: "Single Home",
         address: {
-            postState: "GA",
+            postState: "State",
             postCity: "Morning",
             postAddress: "4332 Rise Road",
             postZipcode: "000000",
@@ -73,8 +73,8 @@ const data = [
         publisher: {
             publisherId: "sajfodajfdsfadofjaoadfaf",
             publisherName: "Gradi",
-            publisherCity: "Atlanta",
-            publisherState: "GA",
+            publisherCity: "City",
+            publisherState: "State",
         },
         postId: "ajdfaoidfjasdfpadfaadfadfdsfffdsf",
         filterKey: "all",
@@ -83,7 +83,7 @@ const data = [
         postPrice: 10000000000,
         postType: "condo",
         address: {
-            postState: "GA",
+            postState: "State",
             postCity: "Lithonia",
             postAddress: "0321 Joel Road",
             postZipcode: "000000",
@@ -103,8 +103,8 @@ const data = [
         publisher: {
             publisherId: "sajfodajfdsfadofjaodifaio",
             publisherName: "Gradi",
-            publisherCity: "Atlanta",
-            publisherState: "GA",
+            publisherCity: "City",
+            publisherState: "State",
         },
         postId: "ajdfaoidfjasdfpadfapfajsfjdsi",
         filterKey: "all",
@@ -113,7 +113,7 @@ const data = [
         postPrice: 10000000000,
         postType: "Single Home",
         address: {
-            postState: "GA",
+            postState: "State",
             postCity: "Lithonia",
             postAddress: "555 Rich Road",
             postZipcode: "000000",
@@ -133,8 +133,8 @@ const data = [
         publisher: {
             publisherId: "sajfodajfdsfadofjaodifaio",
             publisherName: "Gradi",
-            publisherCity: "Atlanta",
-            publisherState: "GA",
+            publisherCity: "City",
+            publisherState: "State",
         },
         postId: "ajdfaoidfjasdfpadfapfajsfjdsi",
         filterKey: "all",
@@ -143,7 +143,7 @@ const data = [
         postPrice: 10000000000,
         postType: "Single Home",
         address: {
-            postState: "GA",
+            postState: "State",
             postCity: "Lithonia",
             postAddress: "555 Rich Road",
             postZipcode: "000000",
@@ -163,8 +163,8 @@ const data = [
         publisher: {
             publisherId: "sajfodajfdsfadofjaodifaio",
             publisherName: "Gradi",
-            publisherCity: "Atlanta",
-            publisherState: "GA",
+            publisherCity: "City",
+            publisherState: "State",
         },
         postId: "ajdfaoidfjasdfpadfapfajsfjdsi",
         filterKey: "all",
@@ -173,7 +173,7 @@ const data = [
         postPrice: 10000000000,
         postType: "Single Home",
         address: {
-            postState: "GA",
+            postState: "State",
             postCity: "Lithonia",
             postAddress: "555 Rich Road",
             postZipcode: "000000",
@@ -193,8 +193,8 @@ const data = [
         publisher: {
             publisherId: "sajfodajfdsfadofjaodifaio",
             publisherName: "Gradi",
-            publisherCity: "Atlanta",
-            publisherState: "GA",
+            publisherCity: "City",
+            publisherState: "State",
         },
         postId: "ajdfaoidfjasdfpadfapfajsfjdsi",
         filterKey: "all",
@@ -203,7 +203,7 @@ const data = [
         postPrice: 10000000000,
         postType: "Single Home",
         address: {
-            postState: "GA",
+            postState: "State",
             postCity: "Flowery Branch",
             postAddress: "559 Rich Road",
             postZipcode: "000000",
@@ -223,8 +223,8 @@ const data = [
         publisher: {
             publisherId: "sajfodajfdsfadofjaodifaio",
             publisherName: "Gradi",
-            publisherCity: "Atlanta",
-            publisherState: "GA",
+            publisherCity: "City",
+            publisherState: "State",
         },
         postId: "ajdfaoidfjasdfpadfapfajsfjdsi",
         filterKey: "all",
@@ -233,7 +233,7 @@ const data = [
         postPrice: 10000000000,
         postType: "Single Home",
         address: {
-            postState: "GA",
+            postState: "State",
             postCity: "Lithonia",
             postAddress: "555 Rich Road",
             postZipcode: "000000",
@@ -253,8 +253,8 @@ const data = [
         publisher: {
             publisherId: "sajfodajfdsfadofjaodifaio",
             publisherName: "Gradi",
-            publisherCity: "Atlanta",
-            publisherState: "GA",
+            publisherCity: "City",
+            publisherState: "State",
         },
         postId: "ajdfaoidfjasdfpadfapfajsfjdsi",
         filterKey: "all",
@@ -263,7 +263,7 @@ const data = [
         postPrice: 10000000000,
         postType: "Single Home",
         address: {
-            postState: "GA",
+            postState: "State",
             postCity: "Lithonia",
             postAddress: "555 Rich Road",
             postZipcode: "000000",
@@ -283,8 +283,8 @@ const data = [
         publisher: {
             publisherId: "sajfodajfdsfadofjaodifaio",
             publisherName: "Gradi",
-            publisherCity: "Atlanta",
-            publisherState: "GA",
+            publisherCity: "City",
+            publisherState: "State",
         },
         postId: "ajdfaoidfjasdfpadfapfajsfjdsi",
         filterKey: "all",
@@ -293,7 +293,7 @@ const data = [
         postPrice: 10000000000,
         postType: "Single Home",
         address: {
-            postState: "GA",
+            postState: "State",
             postCity: "Lithonia",
             postAddress: "555 Rich Road",
             postZipcode: "000000",
@@ -313,8 +313,8 @@ const data = [
         publisher: {
             publisherId: "sajfodajfdsfadofjaodifaio",
             publisherName: "Gradi",
-            publisherCity: "Atlanta",
-            publisherState: "GA",
+            publisherCity: "City",
+            publisherState: "State",
         },
         postId: "ajdfaoidfjasdfpadfapfajsfjdsi",
         filterKey: "all",
@@ -323,7 +323,7 @@ const data = [
         postPrice: 10000000000,
         postType: "Single Home",
         address: {
-            postState: "GA",
+            postState: "State",
             postCity: "Lithonia",
             postAddress: "555 Rich Road",
             postZipcode: "000000",
@@ -343,8 +343,8 @@ const data = [
         publisher: {
             publisherId: "sajfodajfdsfadofjaodifaio",
             publisherName: "Gradi",
-            publisherCity: "Atlanta",
-            publisherState: "GA",
+            publisherCity: "City",
+            publisherState: "State",
         },
         postId: "ajdfaoidfjasdfpadfapfajsfjdsi",
         filterKey: "all",
@@ -353,7 +353,7 @@ const data = [
         postPrice: 10000000000,
         postType: "Single Home",
         address: {
-            postState: "GA",
+            postState: "State",
             postCity: "Lithonia",
             postAddress: "555 Rich Road",
             postZipcode: "000000",

@@ -1,16 +1,9 @@
 // This file is exported to ---> src/Routes.js
 // React required
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
-// uuid for Unique Ids 
-import uuid from "react-uuid";
-// Amplify required 
-import { API } from "aws-amplify";
-import config from "../config";
+import { Link } from "react-router-dom"; 
 // Components 
-import LoaderButton from "../components/LoaderButton";
-// Libs
-import { s3Upload } from "../libs/awsLib"; 
+import LoaderButton from "../components/LoaderButton"; 
 import { useFields } from "../libs/hooksLib";
 import { useAppContext } from "../libs/contextLib";
 // -------------- Application Begins Bellow ------------ //
@@ -100,97 +93,11 @@ export default function PostNew() {
 
     // Handling Submitted Form
     async function handleSubmit(event) {
-        event.preventDefault();
-
-        // Checking the file's size
-        if (file1.current && file1.current.size > config.MAX_ATTACHMENT_SIZE) {
-            alert(
-                `Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE /
-                1000000} MB. Image 1`
-            );
-            return;
-        }
-        if (file2.current && file2.current.size > config.MAX_ATTACHMENT_SIZE) {
-            alert(
-                `Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE /
-                1000000} MB. Image 2`
-            );
-            return;
-        }
-        if (file3.current && file3.current.size > config.MAX_ATTACHMENT_SIZE) {
-            alert(
-                `Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE /
-                1000000} MB. Image 3`
-            );
-            return;
-        }
-        if (file4.current && file4.current.size > config.MAX_ATTACHMENT_SIZE) {
-            alert(
-                `Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE /
-                1000000} MB. Image 4`
-            );
-            return;
-        }
-        if (file5.current && file5.current.size > config.MAX_ATTACHMENT_SIZE) {
-            alert(
-                `Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE /
-                1000000} MB. Image 5`
-            );
-            return;
-        }
+        event.preventDefault(); 
 
         setIsLoading(true);
 
         try {
-            const image1 = file1.current
-                ? await s3Upload(file1.current)
-                : null;
-            const image2 = file2.current
-                ? await s3Upload(file2.current)
-                : null;
-            const image3 = file3.current
-                ? await s3Upload(file3.current)
-                : null;
-            const image4 = file4.current
-                ? await s3Upload(file4.current)
-                : null;
-            const image5 = file5.current
-                ? await s3Upload(file5.current)
-                : null;
-
-            // Note: making your data lowercase will help with your perform search 
-            // on your dynamodb table -- use .toLowerCase()
-            // Dynamodb is case sensitive. Example: a user searching for "Home" in the search bar
-            // will only get results for "Home" not "HOME", "home", or any other combination
-            await createPost({
-                // Post Description
-                postId: uuid(),
-                postStatus: fields.postStatus.toLowerCase(),
-                postType: fields.postType.toLowerCase(),
-                postStyle: fields.postStyle.toLowerCase(),
-                postPrice: Number(fields.postPrice),
-                postAcreage: Number(fields.postAcreage),
-                numberOfBaths: fields.numberOfBaths,
-                numberOfBedrooms: fields.numberOfBedrooms,
-                postDescription: fields.postDescription,
-                // Seller Informations 
-                sellerLastName: userLastName.toLowerCase(),
-                sellerFirstName: userFirstName.toLowerCase(),
-                sellerPhoneNumber: fields.sellerPhoneNumber,
-                // Post Location
-                streetCity: fields.streetCity.toLowerCase(),
-                streetState: fields.streetState.toLowerCase(),
-                streetCountry: fields.streetCountry.toLowerCase(),
-                streetZipcode: fields.streetZipcode, 
-                streetAddress: fields.streetAddress.toLowerCase(),
-                streetAddressLine2: fields.streetAddressLine2.toLowerCase(),
-                // Images
-                image1,
-                image2,
-                image3,
-                image4,
-                image5
-            });
              
             window.location.href = `/dashboard`;
 
@@ -200,12 +107,6 @@ export default function PostNew() {
         }
     }
 
-    // Creating New Post
-    function createPost(post) {
-        return API.post("posts", "/posts", {
-            body: post
-        });
-    }
 
     // Returing UI
     return ( 

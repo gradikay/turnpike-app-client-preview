@@ -45,10 +45,7 @@ export default function ResetPassword() {
         event.preventDefault();
         setIsLoading(true);
 
-        try {
-
-            // Amplify's Auth.forgotPassword : Check AWS cognito for submitted email 
-            const sentRequest = await Auth.forgotPassword(fields.email)
+        try { 
 
             setIsLoading(false);
             setSentRequest(sentRequest);
@@ -68,12 +65,7 @@ export default function ResetPassword() {
         setIsLoading(true);
 
         try {
-
-            // Getting user new password and email
-            await Auth.forgotPasswordSubmit(fields.email, fields.confirmationCode, fields.password)
-            // Then Sign in the user
-            await Auth.signIn(fields.email, fields.password);
-            
+                         
             userHasAuthenticated(true); 
 
         } catch (e) {
@@ -137,7 +129,7 @@ function RenderEmailField(props) {
 
                 { /* Header - Start */}
                 <header className="col-sm-9 text-center border-bottom mb-3 mx-auto">
-                    <h1>Larissa</h1>
+                    <h1>Turnpike</h1>
                     <p>Please, Verify your email bellow!</p>
                 </header>
                 { /* Header - End */}
@@ -182,7 +174,7 @@ function RenderEmailField(props) {
                     { /* Lower Section - Start */}
                     <section className="p-2 border-top">
                         <p className="border-bottom pb-3">
-                            <small>By using this application, you agree to Larissa's <a href="#">Terms of Service</a> and <a href="#">Privacy Notice</a>. </small>
+                            <small>By using this application, you agree to Turnpike's <a href="#">Terms of Service</a> and <a href="#">Privacy Notice</a>. </small>
                         </p>
 
                         <a href="/login"> Login </a>
@@ -224,7 +216,7 @@ function RenderResetPasswordField(props) {
 
                     { /* Header - Start */}
                     <header className="col-sm-9 text-center border-bottom mb-3 mx-auto">
-                        <h1>Larissa</h1> 
+                        <h1>Turnpike</h1> 
                         <p>Please, Check your email for a confirmation code!</p>
                     </header>
                     { /* Header - End */}

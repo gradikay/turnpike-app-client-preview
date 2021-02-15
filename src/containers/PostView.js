@@ -3,10 +3,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 // Amplify required
-import { S3Image } from 'aws-amplify-react';
-import { API } from "aws-amplify";
+import { S3Image } from 'aws-amplify-react'; 
 // CSS
 import "../css/PostView.css"
+import img1 from "../img/img1.jpg";
+import { data as dummyPosts } from "../DummyData/data"
 // -------------- Application Begins Bellow ------------ //
 
 // Main Application
@@ -15,7 +16,7 @@ export default function PostView() {
     // Important variables 
     const { id } = useParams();
     const [search, setSearch] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false); 
     const [post, setPost] = useState([
         {
             property: "",
@@ -67,50 +68,6 @@ export default function PostView() {
         }
     }
 
-    // Retreiving data from database
-    useEffect(() => {
-
-        // Cleanup variable
-        let unmounted = false;
-
-        // Loading post from Dynamodb
-        function loadPosts() {
-            return API.get("posts", `/publicpost/${id}`);
-        } 
-
-        async function onLoad() {
-
-            setIsLoading(true);
-
-            try {
-
-                const post = await loadPosts(); 
-                 
-                if (!unmounted) {
-                     // Saving retreived data into post variable
-                    setPost(post);
-                }
-
-                setIsLoading(false);
-
-            } catch (e) {
-                alert(e);
-                setIsLoading(false);
-            }
-
-        }
-
-        // Returning onLoad Function
-        onLoad();
-
-        // Avoid data leaks by cleaning up useEffect : unmounted
-        return () => {
-            unmounted = true; 
-            setPost([]);
-        };
-
-    }, [id]); 
-
 
     // Return UI
     return (
@@ -122,11 +79,11 @@ export default function PostView() {
 
             {!isLoading && post ?
                 <>
-                    <Carousel post={post[0]} />
-                    <SectionA post={post[0]} />          
-                    <SectionB post={post[0]} />             
-                    <SectionC post={post[0]} />     
-                    <SectionD post={post[0]} /> 
+                    <Carousel post={dummyPosts[0]} />
+                    <SectionA post={dummyPosts[0]} />
+                    <SectionB post={dummyPosts[0]} />
+                    <SectionC post={dummyPosts[0]} />
+                    <SectionD post={dummyPosts[0]} />
                 </>
                 :
                 <div className="vh-100 d-flex justify-content-center align-items-center bg-dark text-white">
@@ -265,10 +222,8 @@ function Search(props) {
 }
 
 // Carousel & More about this property column
-function Carousel({ post }) {
-
-    const { userId } = post;
-    const { image1, image2, image3, image4, image5 } = post.images;
+function Carousel( ) {
+     
 
     // Return UI
     return (
@@ -292,19 +247,19 @@ function Carousel({ post }) {
                     {/* The slideshow - Start */} 
                     <div className="carousel-inner">
                         <div className="carousel-item active">
-                            <S3Image level="protected" identityId={userId} imgKey={image1} />
+                            <img src={img1} />
                         </div>
                         <div className="carousel-item">
-                            <S3Image level="protected" identityId={userId} imgKey={image2} />
+                            <img src={img1} />
                         </div>
                         <div className="carousel-item">
-                            <S3Image level="protected" identityId={userId} imgKey={image3} />
+                            <img src={img1} />
                         </div>
                         <div className="carousel-item">
-                            <S3Image level="protected" identityId={userId} imgKey={image4} />
+                            <img src={img1} />
                         </div>
                         <div className="carousel-item">
-                            <S3Image level="protected" identityId={userId} imgKey={image5} />
+                            <img src={img1} />
                         </div>
                     </div>
                     {/* The slideshow - End */}
@@ -391,23 +346,22 @@ function Carousel({ post }) {
 // Other sections
 function SectionA({ post }) {
 
-    // Important variables
-    const { streetAddress, streetAddressLine2, streetCity, streetCountry, streetState, streetZipcode } = post.address;
-    const { numberOfBaths, numberOfBedrooms, postAcreage, postPrice } = post;
-    const price = Number(postPrice).toLocaleString();
+    // Important variables 
+    const { postPrice } = post;
+    const price = Number(postPrice).toLocaleString(); 
 
     // Return UI
     return (
         <section className="container row py-3 mb-3 mx-auto border-bottom">
 
             <div className="col-sm-6">
-                <h1 className="text-capitalize"><small>{streetAddress} {streetAddressLine2}</small></h1>
-                <p className="text-capitalize">{streetCity}, {streetState} {streetZipcode}, {streetCountry}</p>
+                <h1 className="text-capitalize"><small>555 Rich Road st 27</small></h1>
+                <p className="text-capitalize">Atlanta, NC 0000, USA</p>
             </div>
 
             <div className="col-sm-4">
                 <h2>${price}</h2>
-                <p className="text-capitalize">{numberOfBedrooms} beds - {numberOfBaths} baths - {postAcreage} acre lot</p>
+                <p className="text-capitalize">10 beds - 10 baths - 5 acre lot</p>
             </div>
 
         </section>
@@ -432,15 +386,15 @@ function SectionB({ post }) {
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <h4>Interior Details</h4>
-                                <p className="m-0">Number of Bathrooms: {numberOfBaths}</p>
+                                <p className="m-0">Number of Bathrooms:10</p>
                             </li>
                             <li class="list-group-item">
                                 <h4>Beds & Baths</h4>
-                                <p className="m-0">Number of Bedrooms: {numberOfBedrooms}</p>
+                                <p className="m-0">Number of Bedrooms: 10</p>
                             </li>
                             <li class="list-group-item">
                                 <h4>Dimensions and Layout</h4>
-                                <p className="m-0">Living Area: {postAcreage}</p>
+                                <p className="m-0">Living Area: 5</p>
                             </li>
                             <li class="list-group-item">
                                 <h4>Fireplace & Spa</h4>
@@ -503,15 +457,15 @@ function SectionC({ post }) {
 
 function SectionD({ post }) {
 
-    const { firstName, lastName, phoneNumber } = post.seller;
+    const { publisherName } = post.publisher;
     const { postId } = post;
 
     return (
         <section className="container-fluid bg-light row m-0 py-5 border-bottom">
             <div className="col-sm-6">
                  <p>Brokered by:</p>
-                <p className="text-capitalize">{firstName} {lastName}</p>
-                <p>contact: {phoneNumber}</p>
+                <p className="text-capitalize">{publisherName}</p>
+                <p>contact: 999999</p>
             </div>
             <div className="col-sm-6">
                 <ul className="list-group list-group-flush">

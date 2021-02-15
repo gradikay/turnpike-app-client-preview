@@ -1,15 +1,10 @@
 // This file is exported to ---> src/Routes.js
 // React required
-import React, { useState, useEffect } from "react";
-// Amplify required
-import { S3Image } from 'aws-amplify-react';
-import { API } from "aws-amplify";
-// Getting - user status (user login - true or false) - from useAppContext
-import { useAppContext } from "../libs/contextLib"; 
+import React, { useState } from "react";   
 // Dummy Images 
-import img1 from "../img/imgmain.jpg"
-import img2 from "../img/imgcc.jpg"
-import img3 from "../img/imgbb.jpg"
+import img1 from "../img/img1.jpg"
+import img2 from "../img/img1.jpg"
+import img3 from "../img/img1.jpg"
 // CSS
 import "../css/Home.css"
 // Dummy data
@@ -21,9 +16,6 @@ export default function Home() {
 
     // Important variables
     const [search, setSearch] = useState("");
-    const { isAuthenticated } = useAppContext();
-    const [isLoading, setIsLoading] = useState(false); 
-    const [posts, setPosts] = useState([]);
 
     // Handling search
     async function handleSearch(event) {
@@ -38,54 +30,13 @@ export default function Home() {
         }
     }
 
-    // Retreiving data from database
-    useEffect(() => {
-
-        // Cleanup variable
-        let unmounted = false;
-
-        async function onLoad() {
-
-            setIsLoading(true);
-
-            try {
-
-                const posts = await loadPosts(); 
-
-                if (!unmounted) {
-                    // Saving retreived data into posts variable
-                    setPosts(posts); 
-                }
-                setIsLoading(false);
-
-            } catch (e) {
-                alert(e);
-                setIsLoading(false);
-            }
-        }
-
-        onLoad();
-
-        // Avoid data leaks by cleaning up useEffect : unmounted
-        return () => {
-            unmounted = true;
-            setPosts([]);
-        };
-
-    }, [isAuthenticated]); 
-
-    // Function getting data from database
-    function loadPosts() {
-        return API.get("posts", "/publicposts");
-    } 
-
     // Return UI
     return (
         <main id="Home" className="border-bottom"> 
 
             <Header handleSearch={handleSearch} setSearch={setSearch} search={search} />
 
-            <SectionA posts={posts} isLoading={isLoading} />
+            <SectionA />
 
             <SectionB />
 
@@ -108,9 +59,9 @@ function Header(props) {
 
             <div className="col-sm-9 mx-auto align-self-center text-center text-white">
 
-                <h1 className="text-white"> Let's find the best home for you </h1>
+                <h1 className="text-white"> Real Estate Listings App</h1>
 
-                <p> Search our inventory on thousands of homes, a click away. </p>
+                <p>Build the perfect listing applications for you or your clients.</p>
 
                 { /* Search field block - Start */}
                 <Search handleSearch={handleSearch} setSearch={setSearch} search={search} />
@@ -142,7 +93,7 @@ function Search(props) {
                         type="search"
                         name="search"
                         value={search}
-                        placeholder="search"
+                        placeholder="state, zipcode"
                         className="form-control"
                         onChange={e => setSearch(e.target.value)}
                     />
@@ -151,8 +102,8 @@ function Search(props) {
                     { /* Button - Start */}
                     <div className="input-group-append">
 
-                        <button className="btn btn-danger" type="submit">
-                            Search <i className='fa fa-search' role="img" aria-label="search"></i>
+                        <button className="btn btn-info" type="submit">
+                            <i className='fa fa-search' role="img" aria-label="search"></i>
                         </button>
 
                     </div>
@@ -167,7 +118,7 @@ function Search(props) {
 }
 
 // Other sections
-function SectionA({ posts, isLoading }) {
+function SectionA( ) {
 
     // Return UI
     return (
@@ -175,47 +126,48 @@ function SectionA({ posts, isLoading }) {
 
             {/* Heading - Start */}
             <div className="col-sm-12 pb-5">
-                <h2>New Listings in Metro Atlanta, GA</h2>
+                <h2>New Listings in City, State</h2>
                 <p><a href="#">View All New Listings</a></p>
             </div>
             {/* Heading - End */}
 
-            {/* Posts - Start */}
-            {!isLoading ? 
+            {
+                dummyPosts.map((post, i) => {
 
-                posts.map((post, i) => {
 
                     // Important variables
-                    const { image1 } = post.images;
-                    const { streetState, streetCity } = post.address;
+                    const { imageA } = post.images;
+                    const { postState } = post.address;
                     const { postId, userId, postStatus } = post;
                     const convertDate = new Date(post.createdAt);
                     const postedOn = convertDate.toDateString();
                     const price = Number(post.postPrice).toLocaleString();
+
 
                     // Return UI
                     return (
                         <div className="col-sm-6 col-md-4 col-lg-3 text-white p-2" key={i++}>
 
                             <a href={`/view/${postId}`} className="text-white link-card">
-                                <div className="card shadow-sm">
+                                <div className="card border-0 shadow-sm">
 
-                                    { /* Image */ }
-                                    <S3Image level="protected" identityId={userId} imgKey={image1} />
+                                    { /* Image */}
+                                    <img src={imageA} />
 
-                                    { /* Overlay - Start */ }
+
+                                    { /* Overlay - Start */}
                                     <div className="card-img-overlay">
 
-                                        { /* Top */ }
+                                        { /* Top */}
                                         <div className="overlay-top">
                                             <span className="badge badge-primary rounded">
                                                 {postStatus} - {postedOn}
                                             </span>
                                         </div>
 
-                                        { /* Bottom */ }
+                                        { /* Bottom */}
                                         <div className="overlay-bottom">
-                                            <p className="m-0"><small>{streetCity}, {streetState}</small></p>
+                                            <p className="m-0"><small>{postState}</small></p>
                                             <p><b>${price}</b></p>
                                         </div>
 
@@ -228,14 +180,11 @@ function SectionA({ posts, isLoading }) {
                         </div>
                     );
                 })
-                    :
-                "Loading"
             }
-            {/* Posts - End */}
 
             {/* Heading - Start */}
             <div className="col-sm-12 py-5">
-                <h2>Pending Listings in Metro Atlanta, GA</h2>
+                <h2>Pending Listings in City, State</h2>
                 <p><a href="#">View All New Listings</a></p>
             </div>
             {/* Heading - End */}
@@ -294,7 +243,7 @@ function SectionA({ posts, isLoading }) {
             {/* Dummy Posts - End */}
              
             <div className="col-sm-12 pt-5">
-                <h2>What's happening in Metro Atlanta, GA</h2>
+                <h2>What's happening in City, State</h2>
             </div> 
             <div className="col-sm-3 p-2">
                 <h3 className="m-0">1,627</h3>

@@ -17,20 +17,20 @@ function SectionA() {
             <div className="col-sm-3">
                 <p>Popular Real Estate Markets</p>
                 <ul style={{ listStyle: "none" }}>
-                    <li>Houston, TX Real Estate</li>
-                    <li>Atlanta, GA Real Estate</li>
-                    <li>Macon, GA Real Estate</li>
-                    <li>Los Angeles,CA Real Estate</li>
+                    <li>city, state Real Estate</li>
+                    <li>city, state Real Estate</li>
+                    <li>city, state Real Estate</li>
+                    <li>city, state Real Estate</li>
                     <li className="text-primary"><small>SEE MORE</small></li>
                 </ul>
             </div>
             <div className="col-sm-3">
                 <p>Popular Apartment Cities</p>
                 <ul style={{ listStyle: "none" }}>
-                    <li>Houston, TX Apartments</li>
-                    <li>Atlanta, GA Apartments</li>
-                    <li>Macon, GA Apartments</li>
-                    <li>Los Angeles, CA Apartments</li>
+                    <li>city, state Apartments</li>
+                    <li>city, state Apartments</li>
+                    <li>city, state Apartments</li>
+                    <li>city, state Apartments</li>
                     <li className="text-primary"><small>SEE MORE</small></li>
                 </ul>
             </div>
@@ -47,10 +47,10 @@ function SectionA() {
             <div className="col-sm-3">
                 <p>Listings By State</p>
                 <ul style={{ listStyle: "none" }}>
-                    <li>Alabama New Listings</li>
-                    <li>Alaska New Listings</li>
-                    <li>Georgia New Listings</li>
-                    <li>North Carolina New Listings</li>
+                    <li>State 1 New Listings</li>
+                    <li>State 2 New Listings</li>
+                    <li>State 3 New Listings</li>
+                    <li>State 4 New Listings</li>
                     <li className="text-primary"><small>SEE MORE</small></li> 
                 </ul>
             </div>
@@ -61,7 +61,7 @@ function SectionB() {
     return (
         <section className="row border-top pt-3">
             <div className="col-sm-12 text-center">
-                <p>2021 Larissa Applications. Fiberabbit. All Rights Reserved</p>
+                <p>2021 Turnpike Applications. Fiberabbit. All Rights Reserved</p>
             </div>
         </section>
         );

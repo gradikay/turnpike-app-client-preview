@@ -6,10 +6,9 @@ import { Link, useParams } from "react-router-dom";
 // Amplify required
 import { API } from "aws-amplify";
 // Components
-import LoaderButton from "../components/LoaderButton";
-import { S3Image } from 'aws-amplify-react'; 
+import LoaderButton from "../components/LoaderButton"; 
 // Libs
-import { Storage } from "aws-amplify";
+import img1 from "../img/img1.jpg";
 // -------------- Application Begins Bellow ------------ //
 
 // Main Application
@@ -62,46 +61,35 @@ export default function PostEdit() {
 
             try {
 
-                if (!unmounted) {
-
-                    // Important variables
-                    const post = await loadPost();
-                    const { postStatus, postPrice, postType, postStyle, postDescription, userId, postAcreage, numberOfBaths, numberOfBedrooms } = post;
-
-                    const { firstName, lastName, phoneNumber } = post.seller;
-
-                    const { streetZipcode, streetAddress, streetAddressLine2, streetCity, streetState, streetCountry } = post.address;
-
-                    const { image1, image2, image3, image4, image5 } = post.images;
-
+                if (!unmounted) { 
                     // Important variables
                     // Post Description
-                    setPostType(postType);
-                    setPostStyle(postStyle);
-                    setPostPrice(postPrice);
-                    setPostStatus(postStatus);
-                    setPostAcreage(postAcreage);
-                    setNumberOfBaths(numberOfBaths);
-                    setNumberOfBedrooms(numberOfBedrooms);
+                    setPostType("condo");
+                    setPostStyle("Congolese");
+                    setPostPrice("1000000");
+                    setPostStatus("sold");
+                    setPostAcreage("10");
+                    setNumberOfBaths("10");
+                    setNumberOfBedrooms("5");
                     // Seller Information
-                    setUserId(userId);
-                    setSellerLastName(lastName);
-                    setSellerFirstName(firstName);
-                    setSellerPhoneNumber(phoneNumber);
+                    setUserId("9999999");
+                    setSellerLastName("Gradi");
+                    setSellerFirstName("Musa");
+                    setSellerPhoneNumber("909000000");
                     // Post Location
-                    setStreetCity(streetCity);
-                    setStreetState(streetState);
-                    setStreetCountry(streetCountry);
-                    setStreetAddress(streetAddress);
-                    setStreetZipcode(streetZipcode);
-                    setPostDescription(postDescription);
-                    setStreetAddressLine2(streetAddressLine2);
+                    setStreetCity("Atlanta");
+                    setStreetState("NC");
+                    setStreetCountry("USA");
+                    setStreetAddress("5665 Rich Road");
+                    setStreetZipcode("00000");
+                    setPostDescription("des");
+                    setStreetAddressLine2("st 27");
                     // Images
-                    setImage1(image1);
-                    setImage2(image2);
-                    setImage3(image3);
-                    setImage4(image4);
-                    setImage5(image5);
+                    setImage1(null);
+                    setImage2(null);
+                    setImage3(null);
+                    setImage4(null);
+                    setImage5(null);
                 }
 
             } catch (e) {
@@ -136,32 +124,7 @@ export default function PostEdit() {
         setIsLoading(true);
 
         try {
-
-            // Note: making your data lowercase will help with your perform search 
-            // on your dynamodb table -- use .toLowerCase()
-            // Dynamodb is case sensitive. Example: a user searching for "Home" in the search bar
-            // will only get results for "Home" not "HOME", "home", or any other combination
-            await updatePost({
-                // Post Description 
-                postStatus: postStatus.toLowerCase(),
-                postType: postType.toLowerCase(),
-                postStyle: postStyle.toLowerCase(),
-                postPrice: Number(postPrice),
-                postAcreage: Number(postAcreage),
-                numberOfBaths: numberOfBaths,
-                numberOfBedrooms: numberOfBedrooms,
-                postDescription: postDescription,
-                // Seller Informations 
-                sellerPhoneNumber: sellerPhoneNumber,
-                // Post Location
-                streetCity: streetCity.toLowerCase(),
-                streetState: streetState.toLowerCase(),
-                streetCountry: streetCountry.toLowerCase(),
-                streetZipcode: streetZipcode,
-                streetAddress: streetAddress.toLowerCase(),
-                streetAddressLine2: streetAddress.toLowerCase(),
-            });
-
+             
             // Redirect us to dashboard after update is complete
             window.location.href = `/dashboard`;
 
@@ -169,19 +132,7 @@ export default function PostEdit() {
             alert(e);
             setIsLoading(false);
         }
-    }
-     
-    // Updating Post
-    function updatePost(post) {
-        return API.put("posts", `/posts/${id}`, {
-            body: post
-        });
-    }
-
-    // Deleting Post
-    function deletePost() {
-        return API.del("posts", `/posts/${id}`);
-    }
+    } 
 
     // Handling Delete Post
     async function handleDelete(event) {
@@ -197,13 +148,7 @@ export default function PostEdit() {
 
         setIsDeleting(true);
 
-        try {
-            await Storage.remove(image1, { level: 'protected' });
-            await Storage.remove(image2, { level: 'protected' });
-            await Storage.remove(image3, { level: 'protected' });
-            await Storage.remove(image4, { level: 'protected' });
-            await Storage.remove(image5, { level: 'protected' });
-            await deletePost();
+        try { 
             window.location.href = `/dashboard`;
         } catch (e) {
             alert(e);
@@ -222,14 +167,7 @@ export default function PostEdit() {
 
             { /* Images - block & props - Start */}
             <div className="container row mx-auto p-0">
-                <Images
-                    image1={image1}
-                    image2={image2}
-                    image3={image3}
-                    image4={image4}
-                    image5={image5} 
-                    userId={userId}
-                />
+                <Images />
             </div>
             { /* Images - block & props - End */}
 
@@ -302,18 +240,6 @@ function Header({id}) {
 // Image function
 function Images(props) {
 
-    // Important variable
-    const {
-
-        image1,
-        image2,
-        image3,
-        image4,
-        image5,
-        userId
-
-    } = props; 
-
     return (
         <div className="row mx-auto justify-content-center ">
 
@@ -321,7 +247,7 @@ function Images(props) {
             <div className="col-sm image-container p-0"> 
 
                 <div className="card">
-                    <S3Image level="protected" identityId={userId} imgKey={image1} /> 
+                    <img src={img1} /> 
                 </div>
                 
             </div>
@@ -331,7 +257,7 @@ function Images(props) {
             <div className="col-sm image1-container p-0">
 
                 <div className="card">
-                    <S3Image level="protected" identityId={userId} imgKey={image2} />
+                    <img src={img1} />
                 </div>
 
             </div>
@@ -341,7 +267,7 @@ function Images(props) {
             <div className="col-sm image1-container p-0">
 
                 <div className="card">
-                    <S3Image level="protected" identityId={userId} imgKey={image3} />
+                    <img src={img1} />
                 </div>
 
             </div>
@@ -351,7 +277,7 @@ function Images(props) {
             <div className="col-sm image1-container p-0">
 
                 <div className="card">
-                    <S3Image level="protected" identityId={userId} imgKey={image4} />
+                    <img src={img1} />
                 </div>
 
             </div>
@@ -361,7 +287,7 @@ function Images(props) {
             <div className="col-sm image1-container p-0">
 
                 <div className="card">
-                    <S3Image level="protected" identityId={userId} imgKey={image5} />
+                    <img src={img1} />
                 </div>
 
             </div>
@@ -806,9 +732,7 @@ function Preview(props) {
 
     // Important variables
     const {
-
-        image1,
-        userId,
+         
         postStatus,
         postPrice,
         postType,
@@ -822,7 +746,7 @@ function Preview(props) {
                 <div className="card border-0">
 
                     { /* Image */}
-                    <S3Image level="protected" identityId={userId} imgKey={image1} /> 
+                    <img src={img1} />  
 
                     { /* Body */}
                     <div className="card-body">

@@ -1,10 +1,7 @@
 // This file is exported to ---> src/Routes.js
 // React required
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-// Amplify required
-import { S3Image } from 'aws-amplify-react';
-import { API } from "aws-amplify";
+import React, { useState} from "react";
+import { useParams } from "react-router-dom"; 
 // CSS
 import "../css/PostFilter.css"
 // Dummy data
@@ -16,9 +13,7 @@ export default function PostFilter() {
 
     // Important variables 
     const { name } = useParams();
-    const [search, setSearch] = useState(""); 
-    const [isLoading, setIsLoading] = useState(false);
-    const [posts, setPosts] = useState([]);
+    const [search, setSearch] = useState("");  
 
     // Handling search
     async function handleSearch(event) {
@@ -35,56 +30,12 @@ export default function PostFilter() {
         }
     }
 
-    // Retreiving data from database
-    useEffect(() => {
-
-        // Cleanup variable
-        let unmounted = false;
-
-        async function onLoad() {
-
-            setIsLoading(true);
-
-            // Loading post from Dynamodb 
-            function loadPosts() {
-                // Note: "posts" is the [API] -> [endpoint] -> [name] in src -> index.js
-                return API.get("posts", `/searching/all/${name}`);
-            } 
-
-            try {
-
-                // Important variable
-                const posts = await loadPosts(); 
-                 
-                if (!unmounted) {
-                    // Saving retreived data into posts variable
-                    setPosts(posts); 
-                }
-                setIsLoading(false);
-
-            } catch (e) {
-                alert(e);
-                setIsLoading(false);
-            }
-
-        }
-
-        // Return load function
-        onLoad();
-
-        // Avoid data leaks by cleaning up useEffect : unmounted
-        return () => {
-            unmounted = true; 
-            setPosts([]);
-        };
-
-    }, [name]);
 
     // Return UI
     return (
         <main id="PostFilter"> 
             <Header handleSearch={handleSearch} setSearch={setSearch} search={search} />
-            <SectionA posts={posts} name={name} isLoading={isLoading} />          
+            <SectionA   name={name}   />          
         </main>
         );
 }
@@ -219,7 +170,7 @@ function Search(props) {
 function SectionA(props) {
 
     // Important variables
-    const { posts, name, isLoading } = props;
+    const { name } = props;
 
     // Return UI
     return (
@@ -227,59 +178,8 @@ function SectionA(props) {
 
             <div className="col-sm-12">
                 <h2>Searching for <i className="text-capitalize">{name}</i></h2>
-                <p>{ posts.length } Results </p>
+                <p>{dummyPosts.length} Results </p>
             </div>
-             
-            {!isLoading ?
-
-                posts.map((post, i) => {
-
-                    // Important variables
-                    const { image1 } = post.images;
-                    const { streetState, streetCity } = post.address;
-                    const { postId, userId, postStatus } = post;
-                    const convertDate = new Date(post.createdAt);
-                    const postedOn = convertDate.toDateString();
-                    const price = Number(post.postPrice).toLocaleString();
-
-                    // Return UI
-                    return (
-                        <div className="col-md-6 col-lg-4 text-white p-2" key={i++}>
-
-                            <a href={`/view/${postId}`} className="text-white link-card">
-                                <div className="card shadow-sm">
-
-                                    { /* Image */}
-                                    <S3Image level="protected" identityId={userId} imgKey={image1} />
-
-                                    { /* Overlay - Start */}
-                                    <div className="card-img-overlay">
-
-                                        { /* Top */}
-                                        <div className="overlay-top">
-                                            <span className="badge badge-primary rounded">
-                                                {postStatus} - {postedOn}
-                                            </span>
-                                        </div>
-
-                                        { /* Bottom */}
-                                        <div className="overlay-bottom">
-                                            <p className="m-0"><small>{streetCity}, {streetState}</small></p>
-                                            <p><b>${price}</b></p>
-                                        </div>
-
-                                    </div>
-                                    { /* Overlay - End */}
-
-                                </div>
-                            </a>
-
-                        </div>
-                    );
-                })
-                :
-                "Loading"
-            }
              
             {
                 dummyPosts.map((post, i) => {
@@ -334,19 +234,19 @@ function SectionA(props) {
 
 
             <div className="col-sm-12 pt-5">
-                <h2>What's happening in Metro Atlanta, GA</h2>
+                <h2>What's happening in City, State</h2>
             </div> 
             <div className="col-sm-3 p-2">
                 <h3>1,627</h3>
-                <p>Homes for sale</p>
+                <p>Condo for sale</p>
             </div> 
             <div className="col-sm-3 p-2">
                 <h3>50</h3>
-                <p>Open Homes</p>
+                <p>Open land</p>
             </div> 
             <div className="col-sm-3 p-2">
                 <h3>3,709</h3>
-                <p>Recently Sold</p>
+                <p>Recently Sold land</p>
             </div> 
             <div className="col-sm-3 p-2">
                 <h3>159</h3>

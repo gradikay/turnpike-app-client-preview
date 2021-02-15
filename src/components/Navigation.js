@@ -18,9 +18,7 @@ export default function Navigation() {
     const [search, setSearch] = useState("");
 
     // Handling Logout
-    async function handleLogout() {
-
-        await Auth.signOut();
+    async function handleLogout() { 
 
         userHasAuthenticated(false);
 
@@ -49,7 +47,7 @@ export default function Navigation() {
         <nav id="Navigation" className="navbar navbar-expand-lg bg-white shadow-sm">
 
             { /* Brand - Start */}
-            <Link className="navbar-brand p-0" to="/">Larissa</Link>
+            <Link className="navbar-brand p-0" to="/">Turnpike</Link>
             { /* Brand - End */}
 
             { /* Toggler/collapsibe Button - Start */}
@@ -66,11 +64,8 @@ export default function Navigation() {
                     { /* Other Links - End */}
 
                     { /* Return Tabs whenever the user is Logged In or Logged Out - Start */}
-                    {isAuthenticated ? (
-                        <AuthenticatedLinks handleLogout={handleLogout} />
-                    ) : ( 
                         <UnauthenticatedLinks/> 
-                    )}
+                        <AuthenticatedLinks handleLogout={handleLogout} /> 
                     { /* Return Tabs whenever the user is Logged In or Logged Out - Start */}
 
                     { /* Search - Start */}
@@ -113,7 +108,7 @@ function Search(props) {
                     { /* Button - Start */}
                     <div className="input-group-append">
                         <button className="btn btn-light border" type="submit">
-                            <i className='fa fa-search' role="img" aria-label="search"></i>
+                            <span role="img" aria-label="search">&#128270;</span>
                         </button>
                     </div>
                     { /* Button - End */}
@@ -132,24 +127,24 @@ function AppliedLinks() {
         <> 
             { /* Condo - Start */}
             <li className="nav-item">
-                <Link className="nav-link" to="/filter/condo">
-                    Condo
+                <Link className="nav-link" to="/filter/appartments">
+                    Appartments
                 </Link>
             </li>
             { /* Condo - End */}
 
             { /* Land - Start */}
             <li className="nav-item">
-                <Link className="nav-link" to="/filter/land">
-                    Land
+                <Link className="nav-link" to="/filter/space">
+                    Space
                 </Link>
             </li>
-            { /* Land - End */}
+            { /* Land -  End */} 
 
             { /* Sell - Start */}
             <li className="nav-item">
-                <Link className="nav-link" to="/sell">
-                    Sell
+                <Link className="nav-link" to="/filter/office">
+                    Office
                 </Link>
             </li> 
             { /* Sell - End */}
@@ -199,7 +194,7 @@ function AppliedLinks() {
             { /* News and Insight - Start */}
             <li className="nav-item">
                 <Link className="nav-link" to="#nowhere">
-                    News & Insight
+                    <span role="img" aria-label="news">&#128240;</span> News
                 </Link>
             </li>  
             { /* News and Insight - End */}
